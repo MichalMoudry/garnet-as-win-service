@@ -1,4 +1,5 @@
-﻿using Garnet.server;
+﻿using System.Globalization;
+using Garnet.server;
 
 namespace CacheService.Configuration;
 
@@ -14,9 +15,14 @@ internal static class Config
     public static GarnetServerOptions GetServerOptions(IConfiguration cfg)
     {
         var hostAddress = cfg["HostAddress"];
+
         return new GarnetServerOptions
         {
-            Address = hostAddress
+            Address = hostAddress,
+            Port = Convert.ToInt32(
+                cfg["port"] ?? "6378",
+                CultureInfo.InvariantCulture
+            )
         };
     }
 }

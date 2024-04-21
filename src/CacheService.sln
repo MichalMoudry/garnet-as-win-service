@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService", "CacheService\CacheService.csproj", "{8C634647-E695-4E26-BA85-A74E87CF47AB}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CacheService.TestClient", "CacheService.TestClient\CacheService.TestClient.fsproj", "{4BFF23BF-75B2-49B3-8E8F-FB449105DB4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{8C634647-E695-4E26-BA85-A74E87CF47AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C634647-E695-4E26-BA85-A74E87CF47AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C634647-E695-4E26-BA85-A74E87CF47AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BFF23BF-75B2-49B3-8E8F-FB449105DB4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFF23BF-75B2-49B3-8E8F-FB449105DB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFF23BF-75B2-49B3-8E8F-FB449105DB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFF23BF-75B2-49B3-8E8F-FB449105DB4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
