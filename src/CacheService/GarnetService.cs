@@ -1,5 +1,5 @@
+using CacheService.Configuration;
 using Garnet;
-using Garnet.server;
 
 namespace CacheService;
 
@@ -10,15 +10,20 @@ internal sealed partial class GarnetService : BackgroundService
 {
     private readonly ILogger<GarnetService> _logger;
 
-    public GarnetService(ILogger<GarnetService> logger)
-        => _logger = logger;
+    private readonly IConfiguration _cfg;
+
+    public GarnetService(ILogger<GarnetService> logger, IConfiguration cfg)
+    {
+        _logger = logger;
+        _cfg = cfg;
+    }
 
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            var options = new GarnetServerOptions();
+            var options = Config.GetServerOptions(_cfg);
             LogServerInfo(options.Address, options.Port);
 
             var server = new GarnetServer(options);
