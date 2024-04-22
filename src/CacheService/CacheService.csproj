@@ -20,4 +20,9 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.0" />
     <PackageReference Include="Microsoft.Garnet" Version="1.0.5" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="install_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
