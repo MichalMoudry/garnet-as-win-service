@@ -30,7 +30,7 @@ internal sealed partial class GarnetService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            var options = await _cfgService.GetServerOptions(in _secretVault);
+            var options = await _cfgService.GetServerOptions(_secretVault);
             LogServerInfo(options.Address, options.Port);
 
             var server = new GarnetServer(options);

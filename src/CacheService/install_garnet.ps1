@@ -1,4 +1,12 @@
-$exePath = "${PSScriptRoot}\Cache.Service.exe"
-sc.exe garnet binPath= "${exePath}" DisplayName= "Garnet" start= auto depend= TCPIP
-sc.exe description garnet "Garnet cache server service"
-net.exe start garnet
+$exePath = "${PSScriptRoot}\CacheService.exe"
+$serviceParameters = @{
+    Name = "garnet"
+    BinaryPathName = "${exePath}"
+    DisplayName = "Garnet"
+    DependsOn = "TCPIP"
+    StartupType = "Automatic"
+    Description = "Garnet cache server service"
+}
+
+New-Service @serviceParameters
+Start-Service -Name "garnet"

@@ -21,23 +21,23 @@ internal sealed class ConfigService : IConfigService
     }
 
     /// <inheritdoc/>
-    public Task<GarnetServerOptions> GetServerOptions(ref readonly ISecretVault secretVault)
+    public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault)
     {
         var hostAddress = _cfg["HostAddress"];
-        var password = true switch
+        var password = secretVault.IsEnabled switch
         {
-            true => _cfg["Password"],
+            true => await secretVault.GetSecretAsync("cache_password"),
             false => _cfg["Password"]
         };
 
-        return Task.FromResult(new GarnetServerOptions
+        return new GarnetServerOptions
         {
             Address = hostAddress,
             Port = Convert.ToInt32(
                 _cfg["port"] ?? "6378",
                 CultureInfo.InvariantCulture
-            ),
-            AuthSettings = new PasswordAuthenticationSettings(password)
-        });
+            )/*,
+            AuthSettings = new PasswordAuthenticationSettings(password)*/
+        };
     }
 }

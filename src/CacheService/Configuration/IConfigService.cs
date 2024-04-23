@@ -12,6 +12,6 @@ internal interface IConfigService
     /// the Garnet server.
     /// </summary>
     Task<GarnetServerOptions> GetServerOptions(
-        ref readonly ISecretVault secretVault
+        ISecretVault secretVault
     );
 }

@@ -1,5 +1,6 @@
 ﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using CacheService.Configuration.Env;
 
 namespace CacheService.Configuration;
 
@@ -8,10 +9,14 @@ namespace CacheService.Configuration;
 /// </summary>
 internal sealed class AzureKeyVault : ISecretVault
 {
-    private readonly SecretClient _secretClient;
+    private readonly SecretClient? _secretClient;
     
-    public AzureKeyVault(IConfiguration cfg)
+    public AzureKeyVault(IConfiguration cfg, IEnvironmentService envService)
     {
+        if (envService.IsEnvDevelopment())
+        {
+            return;
+        }
         var keyVaultName =
             cfg["KeyVaultName"]
             ?? Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
@@ -21,10 +26,11 @@ internal sealed class AzureKeyVault : ISecretVault
             //new ClientSecretCredential()
             new DefaultAzureCredential()
         );
+        IsEnabled = true;
     }
 
     /// <inheritdoc/>
-    public bool IsEnabled => false;
+    public bool IsEnabled { get; }
 
     /// <inheritdoc/>
     public async Task<string?> GetSecretAsync(
@@ -32,6 +38,13 @@ internal sealed class AzureKeyVault : ISecretVault
         string? version = default,
         CancellationToken cancellationToken = default)
     {
+        if (_secretClient == null)
+        {
+            throw new InvalidOperationException(
+                "Secret client wasn't initialized"
+            );
+        }
+
         var secret = await _secretClient.GetSecretAsync(
             name,
             version,

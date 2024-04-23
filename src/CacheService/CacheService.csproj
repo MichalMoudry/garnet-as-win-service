@@ -9,8 +9,9 @@
 
     <!-- Publish section -->
     <PublishSingleFile>true</PublishSingleFile>
-    <DebugType>embedded</DebugType>
+    <DebugType>none</DebugType>
     <PublishReadyToRun>true</PublishReadyToRun>
+    <SelfHosted>false</SelfHosted>
   </PropertyGroup>
 
   <ItemGroup>
