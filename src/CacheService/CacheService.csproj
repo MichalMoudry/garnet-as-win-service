@@ -11,7 +11,7 @@
     <PublishSingleFile>true</PublishSingleFile>
     <DebugType>none</DebugType>
     <PublishReadyToRun>true</PublishReadyToRun>
-    <SelfHosted>false</SelfHosted>
+    <SelfContained>false</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <None Include="install_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="remove_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

@@ -1,1 +1,1 @@
-dotnet publish .\src\CacheService -r win-x64
+dotnet publish .\src\CacheService -r win-x64 -o /app

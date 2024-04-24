@@ -23,34 +23,37 @@ let mutable cache: option<IDatabase> = None
 [<SetUp>]
 let Setup () =
     task {
-        let! conn = ConnectionMultiplexer.ConnectAsync("localhost:6379")
+        let! conn = ConnectionMultiplexer.ConnectAsync("localhost:6379,password=AxKZn7WuI.2dB6dp5|1z")
         cache <- Some(conn.GetDatabase())
     }
 
 /// A test case covering a simple write and read from the cache.
 [<TestCase("testKey", "test_value")>]
 let TestStringKeySetAndRead (key: string, value: string) =
-    let setResult = cache.Value.StringSet(key, value)
-    Assert.That(setResult, Is.True)
-    let keyVal = cache.Value.StringGet("testKey")
+    let uniqueKey = $"{key}_{Guid.NewGuid()}"
 
+    let setResult = cache.Value.StringSet(uniqueKey, value)
+    Assert.That(setResult, Is.True)
+
+    let keyVal = cache.Value.StringGet(uniqueKey)
     Assert.That(keyVal.ToString(), Is.EqualTo(value))
 
 /// A test case covering handling of JSON content.
 [<Test>]
 let TestJsonValueSetAndRead () =
+    let uniqueKey = $"test_val_{Guid.NewGuid()}"
     let inputData = {
         TestString = "test string"
         TestInt = 5
         TestDate = DateTimeOffset.Now
     }
     let setResult = cache.Value.StringSet(
-        "test_val",
+        uniqueKey,
         JsonSerializer.Serialize(inputData)
     )
     Assert.That(setResult, Is.True)
 
     let cacheContent = JsonSerializer.Deserialize<TestData>(
-        cache.Value.StringGet("test_val")
+        cache.Value.StringGet(uniqueKey)
     )
     Assert.That(cacheContent, Is.EqualTo(inputData));

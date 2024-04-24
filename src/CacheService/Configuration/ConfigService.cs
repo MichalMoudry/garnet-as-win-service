@@ -8,17 +8,9 @@ namespace CacheService.Configuration;
 /// <summary>
 /// Service for handling cache's custom configuration.
 /// </summary>
-internal sealed class ConfigService : IConfigService
+internal sealed class ConfigService(IConfiguration cfg) : IConfigService
 {
-    private readonly IEnvironmentService _envService;
-
-    private readonly IConfiguration _cfg;
-
-    public ConfigService(IEnvironmentService envService, IConfiguration cfg)
-    {
-        _envService = envService;
-        _cfg = cfg;
-    }
+    private readonly IConfiguration _cfg = cfg;
 
     /// <inheritdoc/>
     public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault)
@@ -36,8 +28,8 @@ internal sealed class ConfigService : IConfigService
             Port = Convert.ToInt32(
                 _cfg["port"] ?? "6378",
                 CultureInfo.InvariantCulture
-            )/*,
-            AuthSettings = new PasswordAuthenticationSettings(password)*/
+            ),
+            AuthSettings = new PasswordAuthenticationSettings(password)
         };
     }
 }

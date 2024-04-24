@@ -1,7 +1,7 @@
 $exePath = "${PSScriptRoot}\CacheService.exe"
 $serviceParameters = @{
     Name = "garnet"
-    BinaryPathName = "${exePath}"
+    BinaryPathName = "${exePath} --env=dev"
     DisplayName = "Garnet"
     DependsOn = "TCPIP"
     StartupType = "Automatic"
