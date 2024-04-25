@@ -5,7 +5,7 @@ using CacheService.Configuration.Env;
 namespace CacheService.Configuration.Azure;
 
 /// <summary>
-/// A secret vault implementation through Azure's KeyVault service.
+/// A secret vault implementation through Azure's Key Vault service.
 /// </summary>
 internal sealed class AzureKeyVault : ISecretVault
 {
