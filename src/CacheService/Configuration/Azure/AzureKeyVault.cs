@@ -2,7 +2,7 @@
 using Azure.Security.KeyVault.Secrets;
 using CacheService.Configuration.Env;
 
-namespace CacheService.Configuration;
+namespace CacheService.Configuration.Azure;
 
 /// <summary>
 /// A secret vault implementation through Azure's KeyVault service.
@@ -10,21 +10,17 @@ namespace CacheService.Configuration;
 internal sealed class AzureKeyVault : ISecretVault
 {
     private readonly SecretClient? _secretClient;
-    
+
     public AzureKeyVault(IConfiguration cfg, IEnvironmentService envService)
     {
         if (envService.IsEnvDevelopment())
         {
             return;
         }
-        var keyVaultName =
-            cfg["KeyVaultName"]
-            ?? Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
-
+        var settings = GetKeyVaultSettings(in cfg);
         _secretClient = new SecretClient(
-            new Uri($"https://{keyVaultName}.vault.azure.net"),
-            //new ClientSecretCredential()
-            new DefaultAzureCredential()
+            new Uri($"https://{settings.Uri}"),//.vault.azure.net
+            new ClientSecretCredential(settings.TenantId, settings.ClientId, settings.ClientSecret)
         );
         IsEnabled = true;
     }
@@ -51,5 +47,16 @@ internal sealed class AzureKeyVault : ISecretVault
             cancellationToken
         );
         return secret.HasValue ? secret.Value.Value : null;
+    }
+
+    /// <summary>
+    /// Method for constructing complete Azure Key Vault settings.
+    /// </summary>
+    private static AzKeyVaultSettings GetKeyVaultSettings(ref readonly IConfiguration cfg)
+    {
+        var keyVaultUri =
+            cfg["KeyVaultUri"]
+            ?? Environment.GetEnvironmentVariable("KEY_VAULT_URI");
+        return new AzKeyVaultSettings(keyVaultUri, "", "", "");
     }
 }
