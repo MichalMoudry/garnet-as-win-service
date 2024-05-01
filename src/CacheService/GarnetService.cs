@@ -15,25 +15,32 @@ internal sealed partial class GarnetService : BackgroundService
 
     private readonly IConfigService _cfgService;
 
+    private readonly IEnvironmentService _envService;
+
     public GarnetService(
         ILogger<GarnetService> logger,
         ISecretVault secretVault,
-        IConfigService cfgService)
+        IConfigService cfgService,
+        IEnvironmentService envService)
     {
         _logger = logger;
         _secretVault = secretVault;
         _cfgService = cfgService;
+        _envService = envService;
     }
 
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        if (!stoppingToken.IsCancellationRequested)
         {
-            var options = await _cfgService.GetServerOptions(_secretVault);
+            var options = await _cfgService.GetServerOptions(
+                _secretVault,
+                _envService.CurrentEnvironment
+            );
             LogServerInfo(options.Address, options.Port);
 
-            var server = new GarnetServer(options);
+            using var server = new GarnetServer(options);
             server.Start();
 
             await Task.Delay(Timeout.Infinite, stoppingToken);

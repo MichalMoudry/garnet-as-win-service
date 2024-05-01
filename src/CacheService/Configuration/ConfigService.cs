@@ -1,4 +1,5 @@
 using System.Globalization;
+using CacheService.Configuration.Env;
 using Garnet.server;
 using Garnet.server.Auth;
 
@@ -10,7 +11,7 @@ namespace CacheService.Configuration;
 internal sealed class ConfigService(IConfiguration cfg) : IConfigService
 {
     /// <inheritdoc/>
-    public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault)
+    public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault, AppEnvironment currentEnv)
     {
         var password = secretVault.IsEnabled switch
         {
