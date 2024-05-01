@@ -1,5 +1,6 @@
 using CacheService;
 using CacheService.Configuration;
+using CacheService.Configuration.Azure;
 using CacheService.Configuration.Env;
 
 var builder = Host.CreateApplicationBuilder(args);

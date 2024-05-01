@@ -10,23 +10,20 @@ namespace CacheService.Configuration;
 /// </summary>
 internal sealed class ConfigService(IConfiguration cfg) : IConfigService
 {
-    private readonly IConfiguration _cfg = cfg;
-
     /// <inheritdoc/>
-    public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault)
+    public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault, AppEnvironment currentEnv)
     {
-        var hostAddress = _cfg["HostAddress"];
         var password = secretVault.IsEnabled switch
         {
             true => await secretVault.GetSecretAsync("cache_password"),
-            false => _cfg["Password"]
+            false => cfg["Password"]
         };
 
         return new GarnetServerOptions
         {
-            Address = hostAddress,
+            Address = cfg["HostAddress"] ?? "127.0.0.1",
             Port = Convert.ToInt32(
-                _cfg["port"] ?? "6378",
+                cfg["port"] ?? "6378",
                 CultureInfo.InvariantCulture
             ),
             AuthSettings = new PasswordAuthenticationSettings(password)
