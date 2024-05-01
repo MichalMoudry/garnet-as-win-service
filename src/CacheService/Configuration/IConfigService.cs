@@ -1,4 +1,3 @@
-using CacheService.Configuration.Env;
 using Garnet.server;
 
 namespace CacheService.Configuration;
@@ -12,8 +11,5 @@ internal interface IConfigService
     /// Method for obtaining environment specific configuration for
     /// the Garnet server.
     /// </summary>
-    Task<GarnetServerOptions> GetServerOptions(
-        ISecretVault secretVault,
-        AppEnvironment currentEnv
-    );
+    Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault);
 }
