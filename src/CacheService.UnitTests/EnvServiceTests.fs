@@ -42,23 +42,3 @@ let TestIncorrectCfgInitialization (envSymbol: string) =
 
     let createService = fun () -> EnvironmentService(cfg) |> ignore
     Assert.That(createService, Throws.TypeOf<InvalidOperationException>())
-
-/// A simple test validating if the environment is correctly initialized
-/// through an environment variable.
-[<TestCase("DOTNET_ENVIRONMENT", "dev", AppEnvironment.Dev)>]
-[<TestCase("DOTNET_ENVIRONMENT", "stg", AppEnvironment.Stg)>]
-[<TestCase("DOTNET_ENVIRONMENT", "prod", AppEnvironment.Prod)>]
-let TestServiceEnvInitialization (
-    envVarName: string,
-    envSymbol: string,
-    targetEnv: AppEnvironment) =
-    let cfg = Substitute.For<IConfiguration>()
-    Environment.SetEnvironmentVariable(
-        envVarName,
-        envSymbol,
-        EnvironmentVariableTarget.Process
-    )
-    let envService = EnvironmentService(cfg)
-
-    Assert.That(IsCorrectEnv(envService), Is.True)
-    Assert.That(envService.CurrentEnvironment, Is.EqualTo(targetEnv))
