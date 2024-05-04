@@ -3,7 +3,7 @@
 /// <summary>
 /// A vault containing secrets for the cache.
 /// </summary>
-internal interface ISecretVault
+public interface ISecretVault
 {
     /// <summary>
     /// An information if secret vault is enabled or not.
