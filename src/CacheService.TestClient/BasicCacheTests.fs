@@ -23,7 +23,9 @@ let mutable cache: option<IDatabase> = None
 [<SetUp>]
 let Setup () =
     task {
-        let! conn = ConnectionMultiplexer.ConnectAsync("localhost:6379,password=AxKZn7WuI.2dB6dp5|1z")
+        let! conn = ConnectionMultiplexer.ConnectAsync(
+            "localhost:6379,password=AxKZn7WuI.2dB6dp5|1z"
+        )
         cache <- Some(conn.GetDatabase())
     }
 

@@ -1,5 +1,4 @@
 using CacheService.Configuration;
-using CacheService.Configuration.Env;
 using Garnet;
 
 namespace CacheService;
@@ -15,18 +14,14 @@ internal sealed partial class GarnetService : BackgroundService
 
     private readonly IConfigService _cfgService;
 
-    private readonly IEnvironmentService _envService;
-
     public GarnetService(
         ILogger<GarnetService> logger,
         ISecretVault secretVault,
-        IConfigService cfgService,
-        IEnvironmentService envService)
+        IConfigService cfgService)
     {
         _logger = logger;
         _secretVault = secretVault;
         _cfgService = cfgService;
-        _envService = envService;
     }
 
     /// <inheritdoc/>
@@ -34,10 +29,7 @@ internal sealed partial class GarnetService : BackgroundService
     {
         if (!stoppingToken.IsCancellationRequested)
         {
-            var options = await _cfgService.GetServerOptions(
-                _secretVault,
-                _envService.CurrentEnvironment
-            );
+            var options = await _cfgService.GetServerOptions(_secretVault);
             LogServerInfo(options.Address, options.Port);
 
             using var server = new GarnetServer(options);

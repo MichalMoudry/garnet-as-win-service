@@ -26,6 +26,5 @@ jobs:
       working-directory: src
       run: dotnet build --no-restore
     - name: Test
-      if: false # There are no automated tests yet
       working-directory: src
       run: dotnet test --no-build --verbosity normal
