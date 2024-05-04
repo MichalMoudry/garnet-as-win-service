@@ -75,8 +75,15 @@ let TestCorrectConfigServiceInitInProd () =
     task {
         let secretVault = GetProdSecretVault("temp_pass", true)
         let envService = Substitute.For<IEnvironmentService>()
+        envService.IsEnvProduction().Returns(true) |> ignore
         let cfg = Substitute.For<IConfiguration>()
-        Assert.Pass()
+        cfg["HostAddress"].Returns("0.0.0.0") |> ignore
+
+        let cfgService = ConfigService(cfg, envService)
+        let! serverSettings = cfgService.GetServerOptions(secretVault)
+        AssertServerSettings serverSettings {
+            HostAddress = "0.0.0.0"; Port = 6379
+        }
     }
 
 /// A test scenario covering config initialization
