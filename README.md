@@ -12,6 +12,9 @@ the Azure Key Vault service.
 ### CacheService
 ### CacheService.TestClient
 ### CacheService.UnitTests
+A F# test project containing service's unit tests. This project uses NUnit testing framework
+and NSubstitute library for mocking. Also, this project/library is marked as a friend assembly
+by **CacheService** project, so **CacheService.UnitTests** is able to see its internal types.
 
 ## Deployment
 Currently, there is only a manual option for deployment. The deployment process
@@ -30,9 +33,16 @@ or just remove it through sc.exe utility or GUI in Windows.
 This service currently supports configuration of things like host address, port
 or password (only for dev environment). Also, there is the integration with Azure
 Key Vault service.
+
+**Configuration sources**:
+- JSON files (appsettings.json)
+- Command-line arguments
 ### Configuration options
-- Host address
-- Port
-- Password (in dev)
-- Password (outside of dev)
+| Option                    | Description                                                                                    |
+|---------------------------|------------------------------------------------------------------------------------------------|
+| **Environment**               | Certain parts of the service work only in specific environments (like password configuration).<br/>It is possible to override this option through a supported configuration source. |
+| **Host address**              |                                                                                                |
+| **Port**                      |                                                                                                |
+| **Password** (in dev)         |                                                                                                |
+| **Password** (outside of dev) |                                                                                                |
 ### Azure Key Vault integration
