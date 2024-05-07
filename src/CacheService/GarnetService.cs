@@ -6,30 +6,19 @@ namespace CacheService;
 /// <summary>
 /// A service for running a Garnet server.
 /// </summary>
-internal sealed partial class GarnetService : BackgroundService
+internal sealed partial class GarnetService(
+    ILogger<GarnetService> logger,
+    ISecretVault secretVault,
+    IConfigService cfgService) : BackgroundService
 {
-    private readonly ILogger<GarnetService> _logger;
-
-    private readonly ISecretVault _secretVault;
-
-    private readonly IConfigService _cfgService;
-
-    public GarnetService(
-        ILogger<GarnetService> logger,
-        ISecretVault secretVault,
-        IConfigService cfgService)
-    {
-        _logger = logger;
-        _secretVault = secretVault;
-        _cfgService = cfgService;
-    }
+    private readonly ILogger<GarnetService> _logger = logger;
 
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         if (!stoppingToken.IsCancellationRequested)
         {
-            var options = await _cfgService.GetServerOptions(_secretVault);
+            var options = await cfgService.GetServerOptions(secretVault);
             LogServerInfo(options.Address, options.Port);
 
             using var server = new GarnetServer(options);

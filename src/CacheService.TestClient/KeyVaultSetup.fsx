@@ -5,7 +5,8 @@ open System
 
 let client = Azure.Security.KeyVault.Secrets.SecretClient(
     Uri("https://localhost:8443"),
-    Azure.Identity.DefaultAzureCredential()
+    Azure.Identity.ClientSecretCredential(
+    )
 )
 
 let input = "localhost"
@@ -19,3 +20,4 @@ let secret =
     client.GetSecretAsync("cache_password")
     |> Async.AwaitTask
     |> Async.RunSynchronously
+printfn $"{secret}"
