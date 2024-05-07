@@ -43,8 +43,9 @@ Key Vault service.
 | Option                    | Description                                                                                    |
 |---------------------------|------------------------------------------------------------------------------------------------|
 | **Environment**               | Certain parts of the service work only in specific environments (like password configuration).<br/>It is possible to override this option through a supported configuration source. |
-| **Host address**              |                                                                                                |
-| **Port**                      |                                                                                                |
+| **Host address**              | By default, host address is 0.0.0.0.                                                           |
+| **Port**                      | Default port is the same as a default port for Redis which is 6379.                            |
 | **Password** (in dev)         |                                                                                                |
 | **Password** (outside of dev) |                                                                                                |
 ### Azure Key Vault integration
+TODO
