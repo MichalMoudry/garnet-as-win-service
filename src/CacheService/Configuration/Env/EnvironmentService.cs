@@ -39,7 +39,7 @@ internal sealed class EnvironmentService : IEnvironmentService
             "prod" or "production" => AppEnvironment.Prod,
             "stg" or "staging" => AppEnvironment.Stg,
             "dev" or "development" => AppEnvironment.Dev,
-            _ => throw new InvalidOperationException(
+             _ => throw new InvalidOperationException(
                 "Environment variable wasn't set or has unexpected value"
             )
         };

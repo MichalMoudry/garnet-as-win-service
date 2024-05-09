@@ -8,7 +8,9 @@ namespace CacheService.Configuration;
 /// <summary>
 /// Service for handling cache's custom configuration.
 /// </summary>
-internal sealed class ConfigService(IConfiguration cfg, IEnvironmentService envService) : IConfigService
+internal sealed class ConfigService(
+    IConfiguration cfg,
+    IEnvironmentService envService) : IConfigService
 {
     /// <inheritdoc/>
     public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault)
