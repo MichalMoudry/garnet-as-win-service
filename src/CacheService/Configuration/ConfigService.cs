@@ -1,7 +1,7 @@
 using System.Globalization;
 using CacheService.Configuration.Env;
 using Garnet.server;
-using Garnet.server.Auth;
+using Garnet.server.Auth.Settings;
 
 namespace CacheService.Configuration;
 
