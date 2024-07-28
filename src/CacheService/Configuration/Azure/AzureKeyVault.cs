@@ -13,14 +13,18 @@ internal sealed class AzureKeyVault : ISecretVault
 
     public AzureKeyVault(IConfiguration cfg, IEnvironmentService envService)
     {
-        if (envService.IsEnvDevelopment())
+        if (envService.IsDevelopment)
         {
             return;
         }
-        var settings = GetKeyVaultSettings(in cfg);
+        var settings = GetKeyVaultSettings(cfg);
         _secretClient = new SecretClient(
             new Uri($"https://{settings.Uri}"),//.vault.azure.net
-            new ClientSecretCredential(settings.TenantId, settings.ClientId, settings.ClientSecret)
+            new ClientSecretCredential(
+                settings.TenantId,
+                settings.ClientId,
+                settings.ClientSecret
+            )
         );
         IsEnabled = true;
     }
@@ -52,7 +56,7 @@ internal sealed class AzureKeyVault : ISecretVault
     /// <summary>
     /// Method for constructing complete Azure Key Vault settings.
     /// </summary>
-    private static AzKeyVaultSettings GetKeyVaultSettings(ref readonly IConfiguration cfg)
+    private static AzKeyVaultSettings GetKeyVaultSettings(IConfiguration cfg)
     {
         return new AzKeyVaultSettings(
             GetCfgOrEnvValue(cfg["KeyVaultUri"], "KEY_VAULT_URI"),

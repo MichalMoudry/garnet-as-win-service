@@ -57,9 +57,9 @@ public sealed class EnvServiceTests
     private static bool IsCorrectEnv(EnvironmentService service) =>
         service.CurrentEnvironment switch
         {
-            AppEnvironment.Dev => service.IsEnvDevelopment(),
-            AppEnvironment.Stg => service.IsEnvStaging(),
-            AppEnvironment.Prod => service.IsEnvProduction(),
+            AppEnvironment.Dev => service.IsDevelopment,
+            AppEnvironment.Stg => service.IsStaging,
+            AppEnvironment.Prod => service.IsProduction,
             _ => throw new InvalidEnumArgumentException()
         };
 }

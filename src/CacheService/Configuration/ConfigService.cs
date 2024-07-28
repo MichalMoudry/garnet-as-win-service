@@ -18,7 +18,7 @@ internal sealed class ConfigService(
         var password = secretVault.IsEnabled switch
         {
             true => await secretVault.GetSecretAsync("cache_password"),
-            false => !envService.IsEnvProduction()
+            false => !envService.IsProduction
                 ? cfg["Password"]
                 : throw new InvalidOperationException(
                     "Config password shouldn't be used in production"

@@ -68,7 +68,7 @@ public sealed class ServerConfigTests
     {
         var secretVault = GetProdSecretVault("temp_pass", true);
         var envService = Substitute.For<IEnvironmentService>();
-        envService.IsEnvProduction().Returns(true);
+        envService.IsProduction.Returns(true);
         var cfg = Substitute.For<IConfiguration>();
         cfg["HostAddress"].Returns("0.0.0.0");
 
@@ -89,7 +89,7 @@ public sealed class ServerConfigTests
     {
         var secretVault = GetProdSecretVault("temp_pass", false);
         var envService = Substitute.For<IEnvironmentService>();
-        envService.IsEnvProduction().Returns(true);
+        envService.IsProduction.Returns(true);
         var cfg = Substitute.For<IConfiguration>();
 
         var cfgService = new ConfigService(cfg, envService);
