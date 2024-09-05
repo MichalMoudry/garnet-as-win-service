@@ -34,7 +34,8 @@ internal sealed class ConfigService(
                 !string.IsNullOrEmpty(port) ? port : "6379",
                 CultureInfo.InvariantCulture
             ),
-            AuthSettings = new PasswordAuthenticationSettings(password)
+            AuthSettings = new PasswordAuthenticationSettings(password),
+            QuietMode = envService.IsProduction
         };
     }
 }
