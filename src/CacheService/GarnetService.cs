@@ -11,8 +11,6 @@ internal sealed partial class GarnetService(
     ISecretVault secretVault,
     IConfigService cfgService) : BackgroundService
 {
-    private readonly ILogger<GarnetService> _logger = logger;
-
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
