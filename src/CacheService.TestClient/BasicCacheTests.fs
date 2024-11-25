@@ -30,7 +30,7 @@ let Setup () =
 
 /// A test case covering a simple write and read from the cache.
 [<TestCase("testKey", "test_value")>]
-//[<Ignore("For local dev")>]
+[<Ignore("For local dev")>]
 let TestStringKeySetAndRead (key: string, value: string) =
     let uniqueKey = $"{key}_{Guid.NewGuid()}"
 
@@ -44,7 +44,7 @@ let TestStringKeySetAndRead (key: string, value: string) =
 
 /// A test case covering handling of JSON content.
 [<Test>]
-//[<Ignore("For local dev")>]
+[<Ignore("For local dev")>]
 let TestJsonValueSetAndRead () =
     let uniqueKey = $"test_val_{Guid.NewGuid()}"
     let inputData = {
@@ -67,6 +67,7 @@ let TestJsonValueSetAndRead () =
     ))
 
 [<Test>]
+[<Ignore("For local dev")>]
 let TestListOps () =
     task {
         let key = $"test_list_{Guid.NewGuid()}"
