@@ -18,14 +18,25 @@ internal sealed class AzureKeyVault : ISecretVault
             return;
         }
         var settings = GetKeyVaultSettings(cfg);
-        _secretClient = new SecretClient(
-            new Uri($"https://{settings.Uri}"),//.vault.azure.net
-            new ClientSecretCredential(
-                settings.TenantId,
-                settings.ClientId,
-                settings.ClientSecret
-            )
-        );
+
+        if (string.IsNullOrEmpty(settings.ClientSecret))
+        {
+            _secretClient = new SecretClient(
+                new Uri($"https://{settings.Uri}"),
+                new DefaultAzureCredential()
+            );
+        }
+        else
+        {
+            _secretClient = new SecretClient(
+                new Uri($"https://{settings.Uri}"),//.vault.azure.net
+                new ClientSecretCredential(
+                    settings.TenantId,
+                    settings.ClientId,
+                    settings.ClientSecret
+                )
+            );
+        }
         IsEnabled = true;
     }
 
