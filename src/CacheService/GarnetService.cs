@@ -1,3 +1,4 @@
+using System.Net;
 using CacheService.Configuration;
 using Garnet;
 
@@ -17,7 +18,10 @@ internal sealed partial class GarnetService(
         if (!stoppingToken.IsCancellationRequested)
         {
             var options = await cfgService.GetServerOptions(secretVault);
-            LogServerInfo(options.Address, options.Port);
+            if (options.EndPoint is IPEndPoint ipEndPoint)
+            {
+                LogServerInfo(ipEndPoint.Address.ToString(), ipEndPoint.Port);
+            }
 
             using var server = new GarnetServer(options);
             server.Start();

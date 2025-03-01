@@ -1,4 +1,5 @@
-﻿using CacheService.Configuration;
+﻿using System.Net;
+using CacheService.Configuration;
 using CacheService.Configuration.Env;
 using CacheService.UnitTests.Model;
 using Garnet.server;
@@ -74,9 +75,13 @@ public sealed class ServerConfigTests
 
         var cfgService = new ConfigService(cfg, envService);
         var serverSettings = await cfgService.GetServerOptions(secretVault);
+        if (!IPAddress.TryParse("0.0.0.0", out var address))
+        {
+            return;
+        }
         AssertServerSettings(
             serverSettings,
-            new ExpectedServerSettings("0.0.0.0", 6379)
+            new ExpectedServerSettings(address, 6379)
         );
     }
 
@@ -105,10 +110,15 @@ public sealed class ServerConfigTests
         ServerOptions actual,
         ExpectedServerSettings expected)
     {
+        if (actual.EndPoint is not IPEndPoint endPoint)
+        {
+            Assert.That(actual.EndPoint, Is.TypeOf<IPEndPoint>());
+            return;
+        }
         Assert.Multiple(() =>
         {
-            Assert.That(actual.Address, Is.EqualTo(expected.HostAddress));
-            Assert.That(actual.Port, Is.EqualTo(expected.Port));
+            Assert.That(endPoint.Address, Is.EqualTo(expected.HostAddress));
+            Assert.That(endPoint.Port, Is.EqualTo(expected.Port));
         });
     }
 

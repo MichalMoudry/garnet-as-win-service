@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Net;
 using CacheService.Configuration.Env;
 using Garnet.server;
 using Garnet.server.Auth.Settings;
@@ -25,14 +26,14 @@ internal sealed class ConfigService(
                 )
         };
         var address = cfg["HostAddress"];
-        var port = cfg["Port"];
+        var cfgPort = cfg["Port"];
 
+        var isCfgPortValid = int.TryParse(cfgPort, out var port);
         return new GarnetServerOptions
         {
-            Address = !string.IsNullOrEmpty(address) ? address : "127.0.0.1",
-            Port = Convert.ToInt32(
-                !string.IsNullOrEmpty(port) ? port : "6379",
-                CultureInfo.InvariantCulture
+            EndPoint = new IPEndPoint(
+                IPAddress.Loopback,
+                isCfgPortValid ? port : 6379
             ),
             AuthSettings = new PasswordAuthenticationSettings(password),
             QuietMode = envService.IsProduction
