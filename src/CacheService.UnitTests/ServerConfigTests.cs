@@ -32,7 +32,7 @@ public sealed class ServerConfigTests
         var serverSettings = await cfgService.GetServerOptions(secretVault);
         AssertServerSettings(
             serverSettings,
-            new ExpectedServerSettings("127.0.0.1", 6379)
+            new ExpectedServerSettings(IPAddress.Loopback, 6379)
         );
     }
 
@@ -54,9 +54,12 @@ public sealed class ServerConfigTests
 
         var cfgService = new ConfigService(cfg, envService);
         var serverSettings = await cfgService.GetServerOptions(secretVault);
+        var isAddressCorrect = IPAddress.TryParse(address, out var ipAddress);
+
+        Assert.That(isAddressCorrect, Is.True);
         AssertServerSettings(
             serverSettings,
-            new ExpectedServerSettings(address, port)
+            new ExpectedServerSettings(ipAddress!, port)
         );
     }
 

@@ -25,14 +25,22 @@ internal sealed class ConfigService(
                     "Config password shouldn't be used in production"
                 )
         };
+
         var address = cfg["HostAddress"];
         var cfgPort = cfg["Port"];
-
         var isCfgPortValid = int.TryParse(cfgPort, out var port);
+        var isIpAddressValid = IPAddress.TryParse(address, out var ipAddress);
+        if (!isIpAddressValid || ipAddress == null)
+        {
+            throw new InvalidOperationException(
+                $"{address} is not a valid IP address"
+            );
+        }
+
         return new GarnetServerOptions
         {
             EndPoint = new IPEndPoint(
-                IPAddress.Loopback,
+                ipAddress,
                 isCfgPortValid ? port : 6379
             ),
             AuthSettings = new PasswordAuthenticationSettings(password),
