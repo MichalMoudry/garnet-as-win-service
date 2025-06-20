@@ -46,7 +46,7 @@ internal sealed class AzureKeyVault : ISecretVault
     /// <inheritdoc/>
     public async Task<string?> GetSecretAsync(
         string name,
-        string? version = default,
+        string? version = null,
         CancellationToken cancellationToken = default)
     {
         if (_secretClient == null)

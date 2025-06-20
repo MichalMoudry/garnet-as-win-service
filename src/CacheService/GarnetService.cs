@@ -18,9 +18,17 @@ internal sealed partial class GarnetService(
         if (!stoppingToken.IsCancellationRequested)
         {
             var options = await cfgService.GetServerOptions(secretVault);
-            if (options.EndPoint is IPEndPoint ipEndPoint)
+            foreach (var endPoint in options.EndPoints)
             {
-                LogServerInfo(ipEndPoint.Address.ToString(), ipEndPoint.Port);
+                switch (endPoint)
+                {
+                    case IPEndPoint ipEndPoint:
+                        LogServerInfo(
+                            ipEndPoint.Address.ToString(),
+                            ipEndPoint.Port
+                        );
+                        break;
+                }
             }
 
             using var server = new GarnetServer(options);

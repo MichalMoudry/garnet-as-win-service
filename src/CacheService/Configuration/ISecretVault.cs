@@ -15,7 +15,7 @@ public interface ISecretVault
     /// </summary>
     Task<string?> GetSecretAsync(
         string name,
-        string? version = default,
+        string? version = null,
         CancellationToken cancellationToken = default
     );
 }

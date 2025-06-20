@@ -113,16 +113,21 @@ public sealed class ServerConfigTests
         ServerOptions actual,
         ExpectedServerSettings expected)
     {
-        if (actual.EndPoint is not IPEndPoint endPoint)
+        foreach (var endPoint in actual.EndPoints)
         {
-            Assert.That(actual.EndPoint, Is.TypeOf<IPEndPoint>());
-            return;
+            if (endPoint is IPEndPoint ipEndPoint)
+            {
+                using (Assert.EnterMultipleScope())
+                {
+                    Assert.That(ipEndPoint.Address, Is.EqualTo(expected.HostAddress));
+                    Assert.That(ipEndPoint.Port, Is.EqualTo(expected.Port));
+                }
+            }
+            else
+            {
+                Assert.Fail($"Endpoint is not of {nameof(IPEndPoint)} type");
+            }
         }
-        Assert.Multiple(() =>
-        {
-            Assert.That(endPoint.Address, Is.EqualTo(expected.HostAddress));
-            Assert.That(endPoint.Port, Is.EqualTo(expected.Port));
-        });
     }
 
     /// <summary>Method for obtaining a configured prod secret vault.</summary>

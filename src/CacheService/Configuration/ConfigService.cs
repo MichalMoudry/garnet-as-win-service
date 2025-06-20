@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Net;
 using CacheService.Configuration.Env;
 using Garnet.server;
@@ -14,7 +13,8 @@ internal sealed class ConfigService(
     IEnvironmentService envService) : IConfigService
 {
     /// <inheritdoc/>
-    public async Task<GarnetServerOptions> GetServerOptions(ISecretVault secretVault)
+    public async Task<GarnetServerOptions> GetServerOptions(
+        ISecretVault secretVault)
     {
         var password = secretVault.IsEnabled switch
         {
@@ -33,16 +33,15 @@ internal sealed class ConfigService(
         if (!isIpAddressValid || ipAddress == null)
         {
             throw new InvalidOperationException(
-                $"{address} is not a valid IP address"
+                $"'{address}' is not a valid IP address"
             );
         }
 
         return new GarnetServerOptions
         {
-            EndPoint = new IPEndPoint(
-                ipAddress,
-                isCfgPortValid ? port : 6379
-            ),
+            EndPoints = [
+                new IPEndPoint(ipAddress, isCfgPortValid ? port : 6379)
+            ],
             AuthSettings = new PasswordAuthenticationSettings(password),
             QuietMode = envService.IsProduction
         };
