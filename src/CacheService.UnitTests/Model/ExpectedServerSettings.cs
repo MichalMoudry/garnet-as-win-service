@@ -1,6 +1,8 @@
-﻿namespace CacheService.UnitTests.Model;
+﻿using System.Net;
+
+namespace CacheService.UnitTests.Model;
 
 internal sealed record ExpectedServerSettings(
-    string HostAddress,
+    IPAddress HostAddress,
     int Port
 );

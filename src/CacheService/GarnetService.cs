@@ -1,3 +1,4 @@
+using System.Net;
 using CacheService.Configuration;
 using Garnet;
 
@@ -11,20 +12,33 @@ internal sealed partial class GarnetService(
     ISecretVault secretVault,
     IConfigService cfgService) : BackgroundService
 {
-    private readonly ILogger<GarnetService> _logger = logger;
-
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         if (!stoppingToken.IsCancellationRequested)
         {
-            var options = await cfgService.GetServerOptions(secretVault);
-            LogServerInfo(options.Address, options.Port);
+            var options = await cfgService
+                .GetServerOptions(secretVault)
+                .ConfigureAwait(true);
+            foreach (var endPoint in options.EndPoints)
+            {
+                switch (endPoint)
+                {
+                    case IPEndPoint ipEndPoint:
+                        LogServerInfo(
+                            ipEndPoint.Address.ToString(),
+                            ipEndPoint.Port
+                        );
+                        break;
+                }
+            }
 
             using var server = new GarnetServer(options);
             server.Start();
 
-            await Task.Delay(Timeout.Infinite, stoppingToken);
+            await Task
+                .Delay(Timeout.Infinite, stoppingToken)
+                .ConfigureAwait(true);
         }
     }
 

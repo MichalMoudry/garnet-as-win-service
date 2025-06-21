@@ -9,7 +9,7 @@ namespace CacheService.UnitTests;
 /// A fixture with tests validating cache's environment service.
 /// </summary>
 [TestFixture]
-public sealed class EnvServiceTests
+internal sealed class EnvServiceTests
 {
     /// <summary>
     /// A simple test validating if the environment is correctly initialized
@@ -28,12 +28,11 @@ public sealed class EnvServiceTests
         var cfg = Substitute.For<IConfiguration>();
         cfg["Env"].Returns(envSymbol);
         var envService = new EnvironmentService(cfg);
-
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(IsCorrectEnv(envService), Is.True);
             Assert.That(envService.CurrentEnvironment, Is.EqualTo(targetEnv));
-        });
+        }
     }
 
     /// <summary>
@@ -57,9 +56,9 @@ public sealed class EnvServiceTests
     private static bool IsCorrectEnv(EnvironmentService service) =>
         service.CurrentEnvironment switch
         {
-            AppEnvironment.Dev => service.IsEnvDevelopment(),
-            AppEnvironment.Stg => service.IsEnvStaging(),
-            AppEnvironment.Prod => service.IsEnvProduction(),
+            AppEnvironment.Dev => service.IsDevelopment,
+            AppEnvironment.Stg => service.IsStaging,
+            AppEnvironment.Prod => service.IsProduction,
             _ => throw new InvalidEnumArgumentException()
         };
 }

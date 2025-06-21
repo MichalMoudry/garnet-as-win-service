@@ -13,15 +13,30 @@ internal sealed class AzureKeyVault : ISecretVault
 
     public AzureKeyVault(IConfiguration cfg, IEnvironmentService envService)
     {
-        if (envService.IsEnvDevelopment())
+        if (envService.IsDevelopment)
         {
             return;
         }
-        var settings = GetKeyVaultSettings(in cfg);
-        _secretClient = new SecretClient(
-            new Uri($"https://{settings.Uri}"),//.vault.azure.net
-            new ClientSecretCredential(settings.TenantId, settings.ClientId, settings.ClientSecret)
-        );
+        var settings = GetKeyVaultSettings(cfg);
+
+        if (string.IsNullOrEmpty(settings.ClientSecret))
+        {
+            _secretClient = new SecretClient(
+                new Uri($"https://{settings.Uri}"),
+                new DefaultAzureCredential()
+            );
+        }
+        else
+        {
+            _secretClient = new SecretClient(
+                new Uri($"https://{settings.Uri}"),//.vault.azure.net
+                new ClientSecretCredential(
+                    settings.TenantId,
+                    settings.ClientId,
+                    settings.ClientSecret
+                )
+            );
+        }
         IsEnabled = true;
     }
 
@@ -31,7 +46,7 @@ internal sealed class AzureKeyVault : ISecretVault
     /// <inheritdoc/>
     public async Task<string?> GetSecretAsync(
         string name,
-        string? version = default,
+        string? version = null,
         CancellationToken cancellationToken = default)
     {
         if (_secretClient == null)
@@ -45,14 +60,14 @@ internal sealed class AzureKeyVault : ISecretVault
             name,
             version,
             cancellationToken
-        );
+        ).ConfigureAwait(true);
         return secret.HasValue ? secret.Value.Value : null;
     }
 
     /// <summary>
     /// Method for constructing complete Azure Key Vault settings.
     /// </summary>
-    private static AzKeyVaultSettings GetKeyVaultSettings(ref readonly IConfiguration cfg)
+    private static AzKeyVaultSettings GetKeyVaultSettings(IConfiguration cfg)
     {
         return new AzKeyVaultSettings(
             GetCfgOrEnvValue(cfg["KeyVaultUri"], "KEY_VAULT_URI"),

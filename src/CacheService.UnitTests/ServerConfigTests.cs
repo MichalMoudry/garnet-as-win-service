@@ -1,4 +1,5 @@
-﻿using CacheService.Configuration;
+﻿using System.Net;
+using CacheService.Configuration;
 using CacheService.Configuration.Env;
 using CacheService.UnitTests.Model;
 using Garnet.server;
@@ -31,7 +32,7 @@ public sealed class ServerConfigTests
         var serverSettings = await cfgService.GetServerOptions(secretVault);
         AssertServerSettings(
             serverSettings,
-            new ExpectedServerSettings("127.0.0.1", 6379)
+            new ExpectedServerSettings(IPAddress.Loopback, 6379)
         );
     }
 
@@ -53,9 +54,12 @@ public sealed class ServerConfigTests
 
         var cfgService = new ConfigService(cfg, envService);
         var serverSettings = await cfgService.GetServerOptions(secretVault);
+        var isAddressCorrect = IPAddress.TryParse(address, out var ipAddress);
+
+        Assert.That(isAddressCorrect, Is.True);
         AssertServerSettings(
             serverSettings,
-            new ExpectedServerSettings(address, port)
+            new ExpectedServerSettings(ipAddress!, port)
         );
     }
 
@@ -68,15 +72,19 @@ public sealed class ServerConfigTests
     {
         var secretVault = GetProdSecretVault("temp_pass", true);
         var envService = Substitute.For<IEnvironmentService>();
-        envService.IsEnvProduction().Returns(true);
+        envService.IsProduction.Returns(true);
         var cfg = Substitute.For<IConfiguration>();
         cfg["HostAddress"].Returns("0.0.0.0");
 
         var cfgService = new ConfigService(cfg, envService);
         var serverSettings = await cfgService.GetServerOptions(secretVault);
+        if (!IPAddress.TryParse("0.0.0.0", out var address))
+        {
+            return;
+        }
         AssertServerSettings(
             serverSettings,
-            new ExpectedServerSettings("0.0.0.0", 6379)
+            new ExpectedServerSettings(address, 6379)
         );
     }
 
@@ -89,7 +97,7 @@ public sealed class ServerConfigTests
     {
         var secretVault = GetProdSecretVault("temp_pass", false);
         var envService = Substitute.For<IEnvironmentService>();
-        envService.IsEnvProduction().Returns(true);
+        envService.IsProduction.Returns(true);
         var cfg = Substitute.For<IConfiguration>();
 
         var cfgService = new ConfigService(cfg, envService);
@@ -105,11 +113,21 @@ public sealed class ServerConfigTests
         ServerOptions actual,
         ExpectedServerSettings expected)
     {
-        Assert.Multiple(() =>
+        foreach (var endPoint in actual.EndPoints)
         {
-            Assert.That(actual.Address, Is.EqualTo(expected.HostAddress));
-            Assert.That(actual.Port, Is.EqualTo(expected.Port));
-        });
+            if (endPoint is IPEndPoint ipEndPoint)
+            {
+                using (Assert.EnterMultipleScope())
+                {
+                    Assert.That(ipEndPoint.Address, Is.EqualTo(expected.HostAddress));
+                    Assert.That(ipEndPoint.Port, Is.EqualTo(expected.Port));
+                }
+            }
+            else
+            {
+                Assert.Fail($"Endpoint is not of {nameof(IPEndPoint)} type");
+            }
+        }
     }
 
     /// <summary>Method for obtaining a configured prod secret vault.</summary>

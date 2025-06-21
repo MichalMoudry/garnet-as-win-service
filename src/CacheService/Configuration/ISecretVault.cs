@@ -3,7 +3,7 @@
 /// <summary>
 /// A vault containing secrets for the cache.
 /// </summary>
-public interface ISecretVault
+internal interface ISecretVault
 {
     /// <summary>
     /// An information if secret vault is enabled or not.
@@ -15,7 +15,7 @@ public interface ISecretVault
     /// </summary>
     Task<string?> GetSecretAsync(
         string name,
-        string? version = default,
+        string? version = null,
         CancellationToken cancellationToken = default
     );
 }

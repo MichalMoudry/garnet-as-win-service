@@ -3,7 +3,7 @@
 /// <summary>
 /// A service for handling cache's environments.
 /// </summary>
-public interface IEnvironmentService
+internal interface IEnvironmentService
 {
     /// <summary>
     /// Cache's current environment, specified by
@@ -14,15 +14,15 @@ public interface IEnvironmentService
     /// <summary>
     /// Method for checking if the current environment set as production environment.
     /// </summary>
-    bool IsEnvProduction();
+    bool IsProduction { get; }
 
     /// <summary>
     /// Method for checking if the current environment set as staging environment.
     /// </summary>
-    bool IsEnvStaging();
+    bool IsStaging { get; }
 
     /// <summary>
     /// Method for checking if the current environment set as development environment.
     /// </summary>
-    bool IsEnvDevelopment();
+    bool IsDevelopment { get; }
 }
