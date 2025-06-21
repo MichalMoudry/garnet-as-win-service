@@ -17,7 +17,9 @@ internal sealed partial class GarnetService(
     {
         if (!stoppingToken.IsCancellationRequested)
         {
-            var options = await cfgService.GetServerOptions(secretVault);
+            var options = await cfgService
+                .GetServerOptions(secretVault)
+                .ConfigureAwait(true);
             foreach (var endPoint in options.EndPoints)
             {
                 switch (endPoint)
@@ -34,7 +36,9 @@ internal sealed partial class GarnetService(
             using var server = new GarnetServer(options);
             server.Start();
 
-            await Task.Delay(Timeout.Infinite, stoppingToken);
+            await Task
+                .Delay(Timeout.Infinite, stoppingToken)
+                .ConfigureAwait(true);
         }
     }
 

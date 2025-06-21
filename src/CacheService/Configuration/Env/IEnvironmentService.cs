@@ -3,7 +3,7 @@
 /// <summary>
 /// A service for handling cache's environments.
 /// </summary>
-public interface IEnvironmentService
+internal interface IEnvironmentService
 {
     /// <summary>
     /// Cache's current environment, specified by

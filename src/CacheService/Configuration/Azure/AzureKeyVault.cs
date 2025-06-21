@@ -60,7 +60,7 @@ internal sealed class AzureKeyVault : ISecretVault
             name,
             version,
             cancellationToken
-        );
+        ).ConfigureAwait(true);
         return secret.HasValue ? secret.Value.Value : null;
     }
 

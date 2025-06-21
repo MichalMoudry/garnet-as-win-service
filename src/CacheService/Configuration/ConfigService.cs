@@ -18,7 +18,9 @@ internal sealed class ConfigService(
     {
         var password = secretVault.IsEnabled switch
         {
-            true => await secretVault.GetSecretAsync("cache_password"),
+            true => await secretVault
+                .GetSecretAsync("cache_password")
+                .ConfigureAwait(true),
             false => !envService.IsProduction
                 ? cfg["Password"]
                 : throw new InvalidOperationException(
@@ -26,21 +28,18 @@ internal sealed class ConfigService(
                 )
         };
 
-        var address = cfg["HostAddress"];
-        var cfgPort = cfg["Port"];
-        var isCfgPortValid = int.TryParse(cfgPort, out var port);
-        var isIpAddressValid = IPAddress.TryParse(address, out var ipAddress);
-        if (!isIpAddressValid || ipAddress == null)
-        {
-            throw new InvalidOperationException(
-                $"'{address}' is not a valid IP address"
-            );
-        }
-
+        var isIpAddressValid = IPAddress.TryParse(
+            cfg["HostAddress"],
+            out var ipAddress
+        );
+        var isCfgPortValid = int.TryParse(cfg["Port"], out var port);
         return new GarnetServerOptions
         {
             EndPoints = [
-                new IPEndPoint(ipAddress, isCfgPortValid ? port : 6379)
+                new IPEndPoint(
+                    isIpAddressValid ? ipAddress! : IPAddress.Loopback,
+                    isCfgPortValid ? port : 6379
+                )
             ],
             AuthSettings = new PasswordAuthenticationSettings(password),
             QuietMode = envService.IsProduction
