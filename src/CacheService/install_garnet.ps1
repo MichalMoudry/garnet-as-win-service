@@ -9,4 +9,3 @@ $serviceParameters = @{
 }
 
 New-Service @serviceParameters
-Start-Service -Name "garnet"

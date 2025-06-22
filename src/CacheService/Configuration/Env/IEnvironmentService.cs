@@ -12,17 +12,20 @@ internal interface IEnvironmentService
     AppEnvironment CurrentEnvironment { get; }
 
     /// <summary>
-    /// Method for checking if the current environment set as production environment.
+    /// Method for checking if the current environment set as production
+    /// environment.
     /// </summary>
     bool IsProduction { get; }
 
     /// <summary>
-    /// Method for checking if the current environment set as staging environment.
+    /// Method for checking if the current environment set as staging
+    /// environment.
     /// </summary>
     bool IsStaging { get; }
 
     /// <summary>
-    /// Method for checking if the current environment set as development environment.
+    /// Method for checking if the current environment set as development
+    /// environment.
     /// </summary>
     bool IsDevelopment { get; }
 }

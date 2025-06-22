@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <None Include="install_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="start_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
     <None Include="remove_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
