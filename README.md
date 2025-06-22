@@ -1,8 +1,10 @@
 # Garnet cache as a Windows service
-A repository containing an implementation of a windows service containing Garnet server.
+A repository containing an implementation of a Windows service containing Garnet server.
 
-Goal of this project is to create a replacement of Redis for other projects.
-This is also a reason as to why there is an integration with Azure Key Vault.
+Goal of this project is to package Garnet as a Windows service with additional functionality,
+like Azure Key Vault integration.
+
+Link to Garnet repository: [Garnet](https://github.com/microsoft/Garnet "Link to Garnet repository")
 
 ## Getting started
 To get started with this service you will need .NET 8 SDK installed. To verify/work
