@@ -8,7 +8,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
 
     <!-- Publish section -->
-    <PublishSingleFile>true</PublishSingleFile>
+    <PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
     <DebugType>none</DebugType>
     <PublishReadyToRun>true</PublishReadyToRun>
     <SelfContained>false</SelfContained>
