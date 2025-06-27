@@ -10,11 +10,20 @@ Link to Garnet repository: [Garnet](https://github.com/microsoft/Garnet "Link to
 To get started with this service you will need .NET 8 SDK installed. To verify/work
 with a secret/key vault, you will need a local instance or a running instance of
 the Azure Key Vault service.
+
+## Repository structure
+- `/src` - a folder containing source code...
+- `/test` - a folder with projects that are related to testing
+- `/build` - a folder with scripts for building, installing and running the cache service
+
 ## Solution structure
 ### CacheService
-The main project of the solution. This project has a [worker application model](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers "Link to .NET worker documentation"). Garnet cache is running as part of [GarnetService](./src/CacheService/GarnetService.cs "Link to GarnetService source file"). In this project there is also logic related to environment and configuration handling.
+The main project of the solution. This project has a [worker application model](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers "Link to .NET worker documentation").
+Garnet cache is running as part of [GarnetService](./src/CacheService/GarnetService.cs "Link to GarnetService source file").
+In this project there is also logic related to environment and configuration handling.
 ### CacheService.TestClient
-A test project for working with/verifying local instance of the Garnet server. This project uses NUnit testing framework.
+A test project for working with/verifying local instance of the Garnet server.
+This project uses NUnit testing framework.
 ### CacheService.UnitTests
 A F# test project containing service's unit tests. This project uses NUnit testing framework
 and NSubstitute library for mocking. Also, this project/library is marked as a friend assembly
@@ -42,12 +51,12 @@ Key Vault service.
 - JSON files (appsettings.json)
 - Command-line arguments
 ### Configuration options
-| Option                    | Description                                                                                    |
-|---------------------------|------------------------------------------------------------------------------------------------|
+| Option                        | Description                                                                                                                                                                         |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Environment**               | Certain parts of the service work only in specific environments (like password configuration).<br/>It is possible to override this option through a supported configuration source. |
-| **Host address**              | By default, host address is 0.0.0.0.                                                           |
-| **Port**                      | Default port is the same as a default port for Redis which is 6379.                            |
-| **Password** (in dev)         |                                                                                                |
-| **Password** (outside of dev) |                                                                                                |
+| **Host address**              | By default, host address is 0.0.0.0.                                                                                                                                                |
+| **Port**                      | Default port is the same as a default port for Redis which is 6379.                                                                                                                 |
+| **Password** (in dev)         |                                                                                                                                                                                     |
+| **Password** (outside of dev) |                                                                                                                                                                                     |
 ### Azure Key Vault integration
 TODO
