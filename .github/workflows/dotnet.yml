@@ -24,8 +24,8 @@ jobs:
       working-directory: src
       run: dotnet restore
     - name: Build
-      working-directory: src
+      working-directory: test
       run: dotnet build --no-restore
     - name: Test
-      working-directory: src
+      working-directory: test
       run: dotnet test --no-build --verbosity normal
