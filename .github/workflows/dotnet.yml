@@ -21,11 +21,8 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Restore dependencies
-      working-directory: src
       run: dotnet restore
     - name: Build
-      working-directory: test
-      run: dotnet build ./CacheService.UnitTests --no-restore
+      run: dotnet build ./test/CacheService.UnitTests --no-restore
     - name: Test
-      working-directory: test
-      run: dotnet test ./CacheService.UnitTests --no-build --verbosity normal
+      run: dotnet test ./test/CacheService.UnitTests --no-build --verbosity normal
