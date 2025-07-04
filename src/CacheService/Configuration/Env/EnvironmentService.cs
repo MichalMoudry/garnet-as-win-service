@@ -29,10 +29,13 @@ internal sealed class EnvironmentService : IEnvironmentService
     public bool IsStaging => CurrentEnvironment == AppEnvironment.Stg;
 
     /// <summary>
-    /// Method for casting a string representation of an environment to an enumeration value.
+    /// Method for casting a string representation of an environment to an
+    /// enumeration value.
     /// </summary>
     /// <param name="envSymbol">A string representing an environment.</param>
-    /// <exception cref="InvalidOperationException">Env variable contains an invalid/unexpected value.</exception>
+    /// <exception cref="InvalidOperationException">
+    /// Env variable contains an invalid/unexpected value.
+    /// </exception>
     private static AppEnvironment CastEnvStrToEnum(string? envSymbol) =>
         envSymbol?.ToLowerInvariant() switch
         {

@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService", "CacheService\CacheService.csproj", "{8C634647-E695-4E26-BA85-A74E87CF47AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService", "src\CacheService\CacheService.csproj", "{8C634647-E695-4E26-BA85-A74E87CF47AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.UnitTests", "CacheService.UnitTests\CacheService.UnitTests.csproj", "{5815B255-A354-4750-9B87-32D2F8EF8201}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.UnitTests", "test\CacheService.UnitTests\CacheService.UnitTests.csproj", "{5815B255-A354-4750-9B87-32D2F8EF8201}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CacheService.TestClient", "CacheService.TestClient\CacheService.TestClient.fsproj", "{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CacheService.TestClient", "test\CacheService.TestClient\CacheService.TestClient.fsproj", "{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -84,7 +84,8 @@ internal sealed class AzureKeyVault : ISecretVault
     /// </summary>
     /// <param name="cfgVal">A value from a app's configuration.</param>
     /// <param name="envVarName">
-    /// A key/environment variable name that will be searched if config value is null.
+    /// A key/environment variable name that will be searched if config value
+    /// is null.
     /// </param>
     private static string? GetCfgOrEnvValue(string? cfgVal, string envVarName)
         => cfgVal ?? Environment.GetEnvironmentVariable(envVarName);
