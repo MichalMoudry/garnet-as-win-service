@@ -7,7 +7,7 @@ like Azure Key Vault integration.
 Link to Garnet repository: [Garnet](https://github.com/microsoft/Garnet "Link to Garnet repository")
 
 ## Getting started
-To get started with this service you will need .NET 8 SDK installed. To verify/work
+To get started with this service you will need .NET 9 SDK installed. To verify/work
 with a secret/key vault, you will need a local instance or a running instance of
 the Azure Key Vault service.
 
