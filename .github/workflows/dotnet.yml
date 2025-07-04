@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore
     - name: Build
       working-directory: test
-      run: dotnet build --no-restore
+      run: dotnet build ./CacheService.UnitTests --no-restore
     - name: Test
       working-directory: test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./CacheService.UnitTests --no-build --verbosity normal
