@@ -1,13 +1,14 @@
 using System.Net;
-using CacheService.Configuration;
 using Garnet;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-namespace CacheService;
+namespace CacheService.Core;
 
 /// <summary>
-/// A service for running a Garnet server.
+/// A background service for running a Garnet server.
 /// </summary>
-internal sealed partial class GarnetService(
+public sealed partial class GarnetService(
     ILogger<GarnetService> logger,
     ISecretVault secretVault,
     IConfigService cfgService) : BackgroundService

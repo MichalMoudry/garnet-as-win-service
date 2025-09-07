@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.UnitTests", "t
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CacheService.TestClient", "test\CacheService.TestClient\CacheService.TestClient.fsproj", "{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.Core", "src\CacheService.Core\CacheService.Core.csproj", "{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

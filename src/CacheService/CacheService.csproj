@@ -23,15 +23,17 @@
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.14.1" />
     <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.8.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="9.0.6" />
-    <PackageReference Include="Microsoft.Garnet" Version="1.0.75" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="install_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
     <None Include="start_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
     <None Include="remove_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CacheService.Core\CacheService.Core.csproj" />
   </ItemGroup>
 
 </Project>
