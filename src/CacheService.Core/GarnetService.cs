@@ -1,4 +1,5 @@
 using System.Net;
+using CacheService.Core.Config;
 using Garnet;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

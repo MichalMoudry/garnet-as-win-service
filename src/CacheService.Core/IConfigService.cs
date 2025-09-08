@@ -1,11 +1,9 @@
+using CacheService.Core.Config;
 using Garnet.server;
 
-namespace CacheService.Configuration;
+namespace CacheService.Core;
 
-/// <summary>
-/// Service for handling cache's custom configuration.
-/// </summary>
-internal interface IConfigService
+public interface IConfigService
 {
     /// <summary>
     /// Method for obtaining environment specific configuration for

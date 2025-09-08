@@ -1,6 +1,7 @@
 ﻿using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
-using CacheService.Configuration.Env;
+using CacheService.Core.Config;
+using CacheService.Core.Config.Env;
 
 namespace CacheService.Configuration.Azure;
 
