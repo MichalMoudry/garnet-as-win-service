@@ -1,4 +1,4 @@
-using CacheService.Configuration.Azure;
+using CacheService.Configuration;
 using CacheService.Core;
 using CacheService.Core.Config;
 using CacheService.Core.Config.Env;

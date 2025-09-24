@@ -3,7 +3,7 @@ using Azure.Security.KeyVault.Secrets;
 using CacheService.Core.Config;
 using CacheService.Core.Config.Env;
 
-namespace CacheService.Configuration.Azure;
+namespace CacheService.Configuration;
 
 /// <summary>
 /// A secret vault implementation through Azure's Key Vault service.

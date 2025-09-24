@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using CacheService.Configuration.Env;
+using CacheService.Core.Config.Env;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 

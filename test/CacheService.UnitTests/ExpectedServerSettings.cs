@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace CacheService.UnitTests.Model;
+namespace CacheService.UnitTests;
 
 internal sealed record ExpectedServerSettings(
     IPAddress HostAddress,

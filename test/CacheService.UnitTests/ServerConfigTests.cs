@@ -1,7 +1,6 @@
 ﻿using System.Net;
-using CacheService.Configuration;
-using CacheService.Configuration.Env;
-using CacheService.UnitTests.Model;
+using CacheService.Core.Config;
+using CacheService.Core.Config.Env;
 using Garnet.server;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
