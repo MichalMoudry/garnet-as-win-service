@@ -45,7 +45,7 @@ internal sealed class EnvServiceTests
     {
         var cfg = Substitute.For<IConfiguration>();
         cfg["Env"].Returns(envSymbol);
-        Assert.Throws<InvalidOperationException>(
+        Assert.Throws<ArgumentOutOfRangeException>(
             () => _ = new EnvironmentService(cfg)
         );
     }
