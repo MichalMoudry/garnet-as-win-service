@@ -23,9 +23,9 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="NUnit3TestAdapter" Version="6.0.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="6.1.0" />
         <PackageReference Include="StackExchange.Redis" Version="2.10.1" />
-        <PackageReference Update="FSharp.Core" Version="10.0.100" />
+        <PackageReference Update="FSharp.Core" Version="10.0.102" />
     </ItemGroup>
 
 </Project>
