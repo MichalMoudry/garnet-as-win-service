@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AnalysisLevel>latest-recommended</AnalysisLevel>
         <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 

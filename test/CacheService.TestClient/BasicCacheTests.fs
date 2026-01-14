@@ -87,7 +87,9 @@ let TestListOps () =
         let! valuesRange = cache.Value.ListRangeAsync(key)
         let values = List<TestData>(valuesRange.Length)
         for value in valuesRange do
-            values.Add(JsonSerializer.Deserialize(value))
+            match JsonSerializer.Deserialize<TestData>(value) with
+            | null -> ()
+            | redisVal -> values.Add(redisVal)
 
         Assert.That(values, Does.Contain(input))
     }

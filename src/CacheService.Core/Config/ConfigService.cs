@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using CacheService.Core.Config.Env;
 using Garnet.server;
@@ -17,6 +18,7 @@ public sealed class ConfigService(
     public async Task<GarnetServerOptions> GetServerOptions(
         ISecretVault secretVault)
     {
+        Debug.Assert(secretVault != null);
         var password = secretVault.IsEnabled switch
         {
             true => await secretVault

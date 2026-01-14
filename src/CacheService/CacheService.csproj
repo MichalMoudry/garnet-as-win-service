@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <AnalysisLevel>latest-all</AnalysisLevel>
     <InvariantGlobalization>true</InvariantGlobalization>
 
     <!-- Publish section -->

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 
 namespace CacheService.Core.Config.Env;
@@ -9,6 +10,7 @@ public sealed class EnvironmentService : IEnvironmentService
 {
     public EnvironmentService(IConfiguration cfg)
     {
+        Debug.Assert(cfg != null);
         var varEnv =
             Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
             ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
