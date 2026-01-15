@@ -1,4 +1,4 @@
-namespace CacheService.Core.Config.Env;
+namespace CacheService.Core.Env;
 
 /// <summary>
 /// An enumeration covering possible cache's environments, including custom ones.

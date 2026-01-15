@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using System.Net;
-using CacheService.Core.Config.Env;
+using CacheService.Core.Env;
 using Garnet.server;
 using Garnet.server.Auth.Settings;
 using Microsoft.Extensions.Configuration;

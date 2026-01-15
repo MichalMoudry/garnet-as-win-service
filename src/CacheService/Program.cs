@@ -1,7 +1,7 @@
 using CacheService.Configuration;
 using CacheService.Core;
 using CacheService.Core.Config;
-using CacheService.Core.Config.Env;
+using CacheService.Core.Env;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Configuration.AddCommandLine(args);

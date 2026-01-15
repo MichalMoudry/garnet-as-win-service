@@ -1,6 +1,7 @@
-﻿using System.Net;
+﻿using System.Globalization;
+using System.Net;
 using CacheService.Core.Config;
-using CacheService.Core.Config.Env;
+using CacheService.Core.Env;
 using Garnet.server;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
@@ -48,7 +49,7 @@ public sealed class ServerConfigTests
 
         secretVault.IsEnabled.Returns(false);
         cfg["HostAddress"].Returns(address);
-        cfg["Port"].Returns(port.ToString());
+        cfg["Port"].Returns(port.ToString(CultureInfo.InvariantCulture));
         cfg["Password"].Returns("temp_pass");
 
         var cfgService = new ConfigService(cfg, envService);

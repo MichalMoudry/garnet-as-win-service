@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 
-namespace CacheService.Core.Config.Env;
+namespace CacheService.Core.Env;
 
 /// <summary>
 /// A service for handling cache's environments.
