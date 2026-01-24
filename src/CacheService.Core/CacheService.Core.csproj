@@ -6,7 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
-        <PackageReference Include="Microsoft.Garnet" Version="1.0.91" />
+        <PackageReference Include="Microsoft.Garnet" Version="1.0.94" />
     </ItemGroup>
 
 </Project>
