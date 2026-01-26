@@ -4,7 +4,6 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>dotnet-CacheService.Generic-fa0d6ef8-e055-4bb2-9ad8-6b9db2733915</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>

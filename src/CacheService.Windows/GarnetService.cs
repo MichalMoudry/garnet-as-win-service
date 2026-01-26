@@ -7,7 +7,7 @@ namespace CacheService;
 /// A background service for running a Garnet server.
 /// </summary>
 public sealed class GarnetService(
-    ILogger<CacheServer> logger,
+    ILogger<ServerFacade> logger,
     ISecretVault secretVault,
     IConfigService cfgService) : BackgroundService
 {
@@ -16,7 +16,7 @@ public sealed class GarnetService(
     {
         if (!stoppingToken.IsCancellationRequested)
         {
-            var server = new CacheServer(logger, cfgService, secretVault);
+            var server = new ServerFacade(logger, cfgService, secretVault);
             await server.Initialize();
             using var srvInstance = server.Start();
 

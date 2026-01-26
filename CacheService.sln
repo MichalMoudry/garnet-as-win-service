@@ -11,7 +11,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CacheService.TestClient", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.Core", "src\CacheService.Core\CacheService.Core.csproj", "{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.Generic", "src\CacheService.Generic\CacheService.Generic.csproj", "{03388E20-F933-4A2B-8462-0A2AC912CA17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService", "src\CacheService\CacheService.csproj", "{03388E20-F933-4A2B-8462-0A2AC912CA17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

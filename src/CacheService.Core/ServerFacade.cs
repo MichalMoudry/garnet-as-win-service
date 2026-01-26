@@ -6,18 +6,40 @@ using Microsoft.Extensions.Logging;
 
 namespace CacheService.Core;
 
-public partial class CacheServer(
-    ILogger<CacheServer> logger,
-    IConfigService config,
-    ISecretVault vault)
+/// <summary>
+/// A wrapper around <see cref="GarnetServer"/> to simplify the cache server
+/// initialization.
+/// </summary>
+public sealed partial class ServerFacade
 {
     private GarnetServerOptions? _serverOptions;
+    private readonly ILogger<ServerFacade> _log;
+    private readonly IConfigService _configService;
+    private readonly ISecretVault? _secretVault;
+
+    public ServerFacade(
+        ILogger<ServerFacade> logger,
+        IConfigService config,
+        ISecretVault vault)
+    {
+        _log = logger;
+        _configService = config;
+        _secretVault = vault;
+    }
+
+    public ServerFacade(ILogger<ServerFacade> logger, IConfigService config)
+    {
+        _log = logger;
+        _configService = config;
+    }
 
     public async Task Initialize()
     {
-        _serverOptions = await config
-            .GetServerOptions(vault)
-            .ConfigureAwait(true);
+        _serverOptions = _secretVault switch
+        {
+            not null => await _configService.GetServerOptions(_secretVault),
+            null => _configService.GetServerOptions()
+        };
 
         foreach (var endPoint in _serverOptions.EndPoints)
         {

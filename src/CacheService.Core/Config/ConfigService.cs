@@ -7,9 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace CacheService.Core.Config;
 
-/// <summary>
-/// Service for handling cache's custom configuration.
-/// </summary>
+/// <inheritdoc/>
 public sealed class ConfigService(
     IConfiguration cfg,
     IEnvironmentService envService) : IConfigService
@@ -31,21 +29,46 @@ public sealed class ConfigService(
                 )
         };
 
-        var isIpAddressValid = IPAddress.TryParse(
-            cfg["HostAddress"],
-            out var ipAddress
-        );
         var isCfgPortValid = int.TryParse(cfg["Port"], out var port);
         return new GarnetServerOptions
         {
             EndPoints = [
                 new IPEndPoint(
-                    isIpAddressValid ? ipAddress! : IPAddress.Loopback,
+                    ReadIpAddrConfig(cfg["HostAddress"]),
                     isCfgPortValid ? port : 6379
                 )
             ],
             AuthSettings = new PasswordAuthenticationSettings(password),
             QuietMode = envService.IsProduction
         };
+    }
+
+    /// <inheritdoc/>
+    public GarnetServerOptions GetServerOptions()
+    {
+        var isCfgPortValid = int.TryParse(cfg["Port"], out var port);
+        return new GarnetServerOptions
+        {
+            EndPoints = [
+                new IPEndPoint(
+                    ReadIpAddrConfig(cfg["HostAddress"]),
+                    isCfgPortValid ? port : 6379
+                )
+            ],
+            AuthSettings = new PasswordAuthenticationSettings(cfg["Password"]),
+            QuietMode = envService.IsProduction
+        };
+    }
+
+    /// <summary>
+    /// Tries to read an IP address from a provided string. If the string isn't
+    /// a valid IP address, then a loopback address is returned.
+    /// </summary>
+    /// <param name="address">String to parse as the IP address.</param>
+    /// <returns>An instance of <see cref="IPAddress"/>.</returns>
+    private static IPAddress ReadIpAddrConfig(string? address)
+    {
+        var isValid = IPAddress.TryParse(address, out var ipAddress);
+        return isValid && ipAddress != null ? ipAddress : IPAddress.Loopback;
     }
 }
