@@ -9,6 +9,7 @@
     <PublishReadyToRun>true</PublishReadyToRun>
     <SelfContained>false</SelfContained>
     <ServerGarbageCollection>true</ServerGarbageCollection>
+    <RootNamespace>CacheService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

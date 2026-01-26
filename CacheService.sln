@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService", "src\CacheService\CacheService.csproj", "{8C634647-E695-4E26-BA85-A74E87CF47AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.Windows", "src\CacheService.Windows\CacheService.Windows.csproj", "{8C634647-E695-4E26-BA85-A74E87CF47AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.UnitTests", "test\CacheService.UnitTests\CacheService.UnitTests.csproj", "{5815B255-A354-4750-9B87-32D2F8EF8201}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CacheService.TestClient", "test\CacheService.TestClient\CacheService.TestClient.fsproj", "{E8BABF1E-5246-43D5-89AE-70EF0B7306F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.Core", "src\CacheService.Core\CacheService.Core.csproj", "{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService.Generic", "src\CacheService.Generic\CacheService.Generic.csproj", "{03388E20-F933-4A2B-8462-0A2AC912CA17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +38,9 @@ Global
 		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5AEAAA9-3BB6-49E6-8206-1F8C942BC2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03388E20-F933-4A2B-8462-0A2AC912CA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03388E20-F933-4A2B-8462-0A2AC912CA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03388E20-F933-4A2B-8462-0A2AC912CA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03388E20-F933-4A2B-8462-0A2AC912CA17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

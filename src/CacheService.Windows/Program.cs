@@ -1,3 +1,4 @@
+using CacheService;
 using CacheService.Configuration;
 using CacheService.Core;
 using CacheService.Core.Config;
