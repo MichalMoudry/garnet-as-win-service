@@ -1,4 +1,4 @@
-module CacheService.TestClient
+module CacheService.TestClient.BasicCacheTests
 
 open System
 open System.Collections.Generic
@@ -30,7 +30,6 @@ let Setup () =
 
 /// A test case covering a simple write and read from the cache.
 [<TestCase("testKey", "test_value")>]
-[<Ignore("For local dev")>]
 let TestStringKeySetAndRead (key: string, value: string) =
     let uniqueKey = $"{key}_{Guid.NewGuid()}"
 

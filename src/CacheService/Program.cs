@@ -4,6 +4,7 @@ using CacheService.Core.Config;
 using CacheService.Core.Env;
 
 var builder = Host.CreateApplicationBuilder(args);
+builder.Configuration.AddCommandLine(args);
 builder.Services
     .AddHostedService<Worker>()
     .AddSingleton<IEnvironmentService, EnvironmentService>()

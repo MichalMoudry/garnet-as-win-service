@@ -1,7 +1,7 @@
 # Garnet cache as a Windows service
 A repository containing an implementation of a Windows service containing
 Garnet server. There is also `CacheService.Generic`, which is a stripped down
-version, that isn't specialized for any target environment.
+version that isn't specialized for any target environment.
 
 Goal of this project is to package Garnet as a Windows service with additional
 functionality, like Azure Key Vault integration.

@@ -47,6 +47,8 @@ public sealed class ConfigService(
     public GarnetServerOptions GetServerOptions()
     {
         var isCfgPortValid = int.TryParse(cfg["Port"], out var port);
+        var password = cfg["Password"];
+
         return new GarnetServerOptions
         {
             EndPoints = [
@@ -55,8 +57,10 @@ public sealed class ConfigService(
                     isCfgPortValid ? port : 6379
                 )
             ],
-            AuthSettings = new PasswordAuthenticationSettings(cfg["Password"]),
-            QuietMode = envService.IsProduction
+            QuietMode = envService.IsProduction,
+            AuthSettings = !string.IsNullOrEmpty(password)
+                ? new PasswordAuthenticationSettings(password)
+                : new NoAuthSettings()
         };
     }
 

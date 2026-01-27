@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "CacheService.Generic": {
+    "CacheService": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
