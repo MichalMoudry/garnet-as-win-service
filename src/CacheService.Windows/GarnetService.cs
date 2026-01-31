@@ -1,7 +1,7 @@
 using CacheService.Core;
 using CacheService.Core.Config;
 
-namespace CacheService;
+namespace CacheService.Windows;
 
 /// <summary>
 /// A background service for running a Garnet server.

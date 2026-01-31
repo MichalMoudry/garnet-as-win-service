@@ -1,4 +1,4 @@
-namespace CacheService.Configuration;
+namespace CacheService.Windows.Configuration;
 
 /// <summary>
 /// A container for all the Azure Key Vault settings.
