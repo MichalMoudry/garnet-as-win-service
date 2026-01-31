@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\CacheService.Windows\CacheService.Windows.csproj" />
+      <ProjectReference Include="..\..\src\CacheService.Core\CacheService.Core.csproj" />
     </ItemGroup>
 
 </Project>
