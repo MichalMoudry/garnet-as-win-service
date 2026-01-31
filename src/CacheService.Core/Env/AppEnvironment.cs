@@ -1,9 +1,9 @@
-﻿namespace CacheService.Configuration.Env;
+namespace CacheService.Core.Env;
 
 /// <summary>
 /// An enumeration covering possible cache's environments, including custom ones.
 /// </summary>
-internal enum AppEnvironment
+public enum AppEnvironment
 {
     Dev,
     Stg,

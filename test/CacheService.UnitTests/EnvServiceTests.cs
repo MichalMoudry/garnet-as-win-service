@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using CacheService.Configuration.Env;
+using CacheService.Core.Env;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
 
@@ -45,7 +45,7 @@ internal sealed class EnvServiceTests
     {
         var cfg = Substitute.For<IConfiguration>();
         cfg["Env"].Returns(envSymbol);
-        Assert.Throws<InvalidOperationException>(
+        Assert.Throws<ArgumentOutOfRangeException>(
             () => _ = new EnvironmentService(cfg)
         );
     }

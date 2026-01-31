@@ -1,9 +1,9 @@
-﻿namespace CacheService.Configuration.Env;
+namespace CacheService.Core.Env;
 
 /// <summary>
 /// A service for handling cache's environments.
 /// </summary>
-internal interface IEnvironmentService
+public interface IEnvironmentService
 {
     /// <summary>
     /// Cache's current environment, specified by

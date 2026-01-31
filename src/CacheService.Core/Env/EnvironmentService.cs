@@ -1,12 +1,16 @@
-namespace CacheService.Configuration.Env;
+using System.Diagnostics;
+using Microsoft.Extensions.Configuration;
+
+namespace CacheService.Core.Env;
 
 /// <summary>
 /// A service for handling cache's environments.
 /// </summary>
-internal sealed class EnvironmentService : IEnvironmentService
+public sealed class EnvironmentService : IEnvironmentService
 {
     public EnvironmentService(IConfiguration cfg)
     {
+        Debug.Assert(cfg != null);
         var varEnv =
             Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
             ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -36,14 +40,18 @@ internal sealed class EnvironmentService : IEnvironmentService
     /// <exception cref="InvalidOperationException">
     /// Env variable contains an invalid/unexpected value.
     /// </exception>
-    private static AppEnvironment CastEnvStrToEnum(string? envSymbol) =>
-        envSymbol?.ToLowerInvariant() switch
+    private static AppEnvironment CastEnvStrToEnum(string? envSymbol)
+    {
+        return envSymbol?.ToLowerInvariant() switch
         {
             "prod" or "production" => AppEnvironment.Prod,
             "stg" or "staging" => AppEnvironment.Stg,
             "dev" or "development" => AppEnvironment.Dev,
-            _ => throw new InvalidOperationException(
+            _ => throw new ArgumentOutOfRangeException(
+                nameof(envSymbol),
+                envSymbol,
                 "Environment variable wasn't set or has unexpected value"
             )
         };
+    }
 }

@@ -1,4 +1,4 @@
-module CacheService.TestClient
+module CacheService.TestClient.BasicCacheTests
 
 open System
 open System.Collections.Generic
@@ -30,7 +30,6 @@ let Setup () =
 
 /// A test case covering a simple write and read from the cache.
 [<TestCase("testKey", "test_value")>]
-[<Ignore("For local dev")>]
 let TestStringKeySetAndRead (key: string, value: string) =
     let uniqueKey = $"{key}_{Guid.NewGuid()}"
 
@@ -87,7 +86,9 @@ let TestListOps () =
         let! valuesRange = cache.Value.ListRangeAsync(key)
         let values = List<TestData>(valuesRange.Length)
         for value in valuesRange do
-            values.Add(JsonSerializer.Deserialize(value))
+            match JsonSerializer.Deserialize<TestData>(value) with
+            | null -> ()
+            | redisVal -> values.Add(redisVal)
 
         Assert.That(values, Does.Contain(input))
     }

@@ -1,26 +1,29 @@
 # Garnet cache as a Windows service
-A repository containing an implementation of a Windows service containing Garnet server.
+A repository containing an implementation of a Windows service containing
+Garnet server. There is also `CacheService.Generic`, which is a stripped down
+version that isn't specialized for any target environment.
 
-Goal of this project is to package Garnet as a Windows service with additional functionality,
-like Azure Key Vault integration.
+Goal of this project is to package Garnet as a Windows service with additional
+functionality, like Azure Key Vault integration.
 
 Link to Garnet repository: [Garnet](https://github.com/microsoft/Garnet "Link to Garnet repository")
 
 ## Getting started
-To get started with this service you will need .NET 9 SDK installed. To verify/work
+To get started with this service you will need .NET 10 SDK installed. To verify/work
 with a secret/key vault, you will need a local instance or a running instance of
 the Azure Key Vault service.
 
 ## Repository structure
-- `/src` - a folder containing source code...
+- `/src` - a folder containing source code for the main projects
 - `/test` - a folder with projects that are related to testing
-- `/build` - a folder with scripts for building, installing and running the cache service
+- `/build` - a folder with scripts for building, installing and running the
+cache service
 
 ## Solution structure
 ### CacheService
-The main project of the solution. This project has a [worker application model](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers "Link to .NET worker documentation").
-Garnet cache is running as part of [GarnetService](./src/CacheService/GarnetService.cs "Link to GarnetService source file").
-In this project there is also logic related to environment and configuration handling.
+### CacheService.Core
+### CacheService.Windows
+...
 ### CacheService.TestClient
 A test project for working with/verifying local instance of the Garnet server.
 This project uses NUnit testing framework.
@@ -36,8 +39,8 @@ consists of the following steps:
 [release script](./build/release.ps1).
 2. (Optional) Zip all the release files.
 3. Upload files to a target environment/machine.
-4. Run [install script](./src/CacheService/install_garnet.ps1) that is
-included in the release.
+4. Run [install script](./src/CacheService/install_garnet.ps1) that is included
+in the release.
 
 **Note**: to install the service, you can use the [uninstall script](./src/CacheService/remove_garnet.ps1)
 or just remove it through sc.exe utility or GUI in Windows.
@@ -59,4 +62,4 @@ Key Vault service.
 | **Password** (in dev)         |                                                                                                                                                                                     |
 | **Password** (outside of dev) |                                                                                                                                                                                     |
 ### Azure Key Vault integration
-TODO
+TBA
