@@ -36,10 +36,8 @@ let TestStringKeySetAndRead (key: string, value: string) =
     let setResult = cache.Value.StringSet(uniqueKey, value)
     let keyVal = cache.Value.StringGet(uniqueKey)
 
-    Assert.Multiple(fun () -> (
-        Assert.That(setResult, Is.True)
-        Assert.That(keyVal.ToString(), Is.EqualTo(value))
-    ))
+    Assert.That(setResult, Is.True)
+    Assert.That(keyVal, Is.EqualTo(value))
 
 /// A test case covering handling of JSON content.
 [<Test>]
@@ -60,10 +58,8 @@ let TestJsonValueSetAndRead () =
         cache.Value.StringGet(uniqueKey)
     )
 
-    Assert.Multiple(fun () -> (
-        Assert.That(setResult, Is.True)
-        Assert.That(cacheContent, Is.EqualTo(inputData));
-    ))
+    Assert.That(setResult, Is.True)
+    Assert.That(cacheContent, Is.EqualTo(inputData))
 
 [<Test>]
 [<Ignore("For local dev")>]

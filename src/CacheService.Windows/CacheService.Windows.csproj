@@ -1,34 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
-  <PropertyGroup>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <PropertyGroup>
+        <InvariantGlobalization>true</InvariantGlobalization>
 
-    <!-- Publish section -->
-    <PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
-    <DebugType>none</DebugType>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <SelfContained>false</SelfContained>
-    <ServerGarbageCollection>true</ServerGarbageCollection>
-  </PropertyGroup>
+        <!-- Publish section -->
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>false</SelfContained>
+        <ServerGarbageCollection>true</ServerGarbageCollection>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <InternalsVisibleTo Include="CacheService.UnitTests" />
-    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
-  </ItemGroup>
+    <ItemGroup>
+        <InternalsVisibleTo Include="CacheService.UnitTests"/>
+        <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.8.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.8.0"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.2"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="install_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
-    <None Include="start_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
-    <None Include="remove_garnet.ps1" CopyToPublishDirectory="PreserveNewest" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="install_garnet.ps1" CopyToPublishDirectory="PreserveNewest"/>
+        <None Include="start_garnet.ps1" CopyToPublishDirectory="PreserveNewest"/>
+        <None Include="remove_garnet.ps1" CopyToPublishDirectory="PreserveNewest"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CacheService.Core\CacheService.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CacheService.Core\CacheService.Core.csproj"/>
+    </ItemGroup>
 
 </Project>
