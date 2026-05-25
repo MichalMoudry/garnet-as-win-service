@@ -21,6 +21,9 @@ cache service
 
 ## Solution structure
 ### CacheService
+A generic implementation of the cache service. This project doesn't use any
+specific hosting libraries (Windows service, systemd, ...), so it's meant to be
+running in the foreground.
 ### CacheService.Core
 ### CacheService.Windows
 ...
