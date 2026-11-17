@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution items/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Project Path="src/CacheService.Core/CacheService.Core.csproj" />
+  <Project Path="src/CacheService.Windows/CacheService.Windows.csproj" />
+  <Project Path="src/CacheService/CacheService.csproj" />
+  <Project Path="test/CacheService.TestClient/CacheService.TestClient.fsproj" />
+  <Project Path="test/CacheService.UnitTests/CacheService.UnitTests.csproj" />
+</Solution>
