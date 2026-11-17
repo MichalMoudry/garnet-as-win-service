@@ -4,7 +4,7 @@ namespace CacheService;
 
 public sealed partial class Worker(
     ILogger<Worker> workerLog,
-    ILogger<ServerFacade> log,
+    ILogger<ServerWrapper> log,
     IConfigService configSrvc)
     : BackgroundService
 {
@@ -17,7 +17,7 @@ public sealed partial class Worker(
                 workerLog,
                 ThisAssembly.AssemblyInformationalVersion
             );
-            var wrapper = new ServerFacade(log, configSrvc);
+            var wrapper = new ServerWrapper(log, configSrvc);
             await wrapper.Initialize();
             using var server = wrapper.Start();
 

@@ -10,15 +10,15 @@ namespace CacheService.Core;
 /// A wrapper around <see cref="GarnetServer"/> to simplify the cache server
 /// initialization.
 /// </summary>
-public sealed partial class ServerFacade
+public sealed partial class ServerWrapper
 {
     private GarnetServerOptions? _serverOptions;
-    private readonly ILogger<ServerFacade> _log;
+    private readonly ILogger<ServerWrapper> _log;
     private readonly IConfigService _configService;
     private readonly ISecretVault? _secretVault;
 
-    public ServerFacade(
-        ILogger<ServerFacade> logger,
+    public ServerWrapper(
+        ILogger<ServerWrapper> logger,
         IConfigService config,
         ISecretVault vault)
     {
@@ -27,7 +27,7 @@ public sealed partial class ServerFacade
         _secretVault = vault;
     }
 
-    public ServerFacade(ILogger<ServerFacade> logger, IConfigService config)
+    public ServerWrapper(ILogger<ServerWrapper> logger, IConfigService config)
     {
         _log = logger;
         _configService = config;

@@ -1,6 +1,9 @@
 <Solution>
   <Folder Name="/Solution items/">
     <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+    <File Path="version.json" />
   </Folder>
   <Project Path="src/CacheService.Core/CacheService.Core.csproj" />
   <Project Path="src/CacheService.Windows/CacheService.Windows.csproj" />
